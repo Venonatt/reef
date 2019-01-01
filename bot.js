@@ -70,6 +70,36 @@ j = 1;
 
 
 client.on('message', message => {
+if (message.author.id === client.user.id) return;
+if (message.guild) {
+let embed = new Discord.RichEmbed()
+let args = message.content.split(' ').slice(1).join(' ');
+if(message.content.split(' ')[0] == prefix + 'bc2') {
+if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
+if (!args[1]) {
+return;
+}
+  message.guild.members.forEach(m => {
+if(!message.member.hasPermission('ADMINISTRATOR')) return;
+      var bc = new Discord.RichEmbed()
+      .addField('# | الرسالة ', args)
+      .setThumbnail(message.guild.iconURL)
+      .setColor('RANDOM')
+      m.sendMessage(args)
+  });
+         if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply(":x: **ليس لديك صلاحية للنشر هنا**");
+  const AziRo = new Discord.RichEmbed()   
+  .setColor('RANDOM')
+  message.channel.sendEmbed(AziRo);          
+}
+} else {
+  return;
+}
+});
+
+
+
+client.on('message', message => {
   if(message.content.startsWith(prefix + "تقديم")) {
      message.channel.send("**حسنا... قم بكتابه اسمك**").then(e => {
     let filter = m => m.author.id === message.author.id
@@ -80,14 +110,14 @@ client.on('message', message => {
     .then(collected => {
       lan = collected.first().content
       collected.first().delete()
-e.delete();
-     message.channel.send('**[`eric`,`html`,`io`,`py`,`js`]رائع... قم بكتابه لغتك البرمجيه**').then(m => {
+e.delete(); 
+     message.channel.send('**رائع... حسنا اكتب بلد وكم عمرك**').then(m => {
 let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
 .then(co => {
   md = co.first().content
         co.first().delete()
         m.delete();
-message.channel.send('** قم بكتابه خبرتك**').then(ms => {
+message.channel.send('** قلي ايش رح تسوي بالرتبة اداري**').then(ms => {
 let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
 .then(col => {
   br = col.first().content
@@ -97,11 +127,11 @@ ms.delete()
 
  message.channel.send('تم الارسال').then(b => {
 
-var gg = message.guild.channels.find('name', '❆-submissions')
+var gg = message.guild.channels.find('name', 'rank-support')
 if(!gg) return;
 if(gg) {
 gg.send({embed : new Discord.RichEmbed()
-  .setDescription(`** اسم: \n ${lan}\nلغه :link: :\n ${md} \nخبره :\n ${br}  \nتم التقديم بواسطة  : <@${message.author.id}> **`)  
+  .setDescription(`** اسم: \n ${lan}\nعمر وبلد :link: :\n ${md} \nبدي رتبة الاداري :\n ${br}  \nتم التقديم بواسطة  : <@${message.author.id}> **`)  
           .setFooter(`codycode`)
 .setTimestamp()
 });
@@ -118,7 +148,7 @@ gg.send({embed : new Discord.RichEmbed()
 
 client.on('message', message => {
   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + "bc")) {
+if(message.content.startsWith(prefix + "bc1")) {
 if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(prefix.length);
@@ -159,267 +189,6 @@ msg.delete();
 
 
 
-client.on('message', message => {
-  if(message.content.startsWith(prefix + "js")) { 
-     message.channel.send("**اكتب الكود**").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.delete();
-     message.channel.send('**قم بكتابة وصف الكود**').then(m => {
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        m.delete();
-message.channel.send('**اخيرا . قم بكتابة صانع الكود**').then(ms => {
-let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(col => {
-  br = col.first().content
-        col.first().delete()
-
-ms.delete()
-
- message.channel.send('**تم النشر**').then(b => {
-
-var gg = message.guild.channels.find('name', '❆-codes-js')//اسم الروم الي تبي ينشر فيه
-if(!gg) return;
-if(gg) {
-gg.send(`@everyone | @here
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**FOX Community©** :arrow_down:
-${lan}
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**وصف الكود**: ${md}
-**تم النشر بواسطة**: <@${message.author.id}>
-**المصدر / الشخص الذي صنع الكود**: ${br}`);
-}        
-})
-})
-})
-})
-})
-})
-})
- }
-})
-
-
-  
-
-client.on('message', message => {
-  if(message.content.startsWith(prefix + "py")) { 
-     message.channel.send("**اكتب الكود**").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.delete();
-     message.channel.send('**قم بكتابة وصف الكود**').then(m => {
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        m.delete();
-message.channel.send('**اخيرا . قم بكتابة صانع الكود**').then(ms => {
-let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(col => {
-  br = col.first().content
-        col.first().delete()
-
-ms.delete()
-
- message.channel.send('**تم النشر**').then(b => {
-
-var gg = message.guild.channels.find('name', '❆-codes-py')//اسم الروم الي تبي ينشر فيه
-if(!gg) return;
-if(gg) {
-gg.send(`@everyone | @here
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**FOX Community©** :arrow_down:
-${lan}
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**وصف الكود**: ${md}
-**تم النشر بواسطة**: <@${message.author.id}>
-**المصدر / الشخص الذي صنع الكود**: ${br}`);
-}        
-})
-})
-})
-})
-})
-})
-})
- }
-})
-
-
-
-
-client.on('message', message => {
-  if(message.content.startsWith(prefix + "io")) { 
-     message.channel.send("**اكتب الكود**").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.delete();
-     message.channel.send('**قم بكتابة وصف الكود**').then(m => {
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        m.delete();
-message.channel.send('**اخيرا . قم بكتابة صانع الكود**').then(ms => {
-let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(col => {
-  br = col.first().content
-        col.first().delete()
-
-ms.delete()
-
- message.channel.send('**تم النشر**').then(b => {
-
-var gg = message.guild.channels.find('name', '❆-codes-io')//اسم الروم الي تبي ينشر فيه
-if(!gg) return;
-if(gg) {
-gg.send(`@everyone | @here
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**FOX Community©** :arrow_down:
-${lan}
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**وصف الكود**: ${md}
-**تم النشر بواسطة**: <@${message.author.id}>
-**المصدر / الشخص الذي صنع الكود**: ${br}`);
-}        
-})
-})
-})
-})
-})
-})
-})
- }
-})
-
-
-  
-client.on('message', message => {
-  if(message.content.startsWith(prefix + "eric")) { 
-     message.channel.send("**اكتب الكود**").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.delete();
-     message.channel.send('**قم بكتابة وصف الكود**').then(m => {
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        m.delete();
-message.channel.send('**اخيرا . قم بكتابة صانع الكود**').then(ms => {
-let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(col => {
-  br = col.first().content
-        col.first().delete()
-
-ms.delete()
-
- message.channel.send('**تم النشر**').then(b => {
-
-var gg = message.guild.channels.find('name', '❆-codes-eric')//اسم الروم الي تبي ينشر فيه
-if(!gg) return;
-if(gg) {
-gg.send(`@everyone | @here
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**FOX Community©** :arrow_down:
-${lan}
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**وصف الكود**: ${md}
-**تم النشر بواسطة**: <@${message.author.id}>
-**المصدر / الشخص الذي صنع الكود**: ${br}`);
-}        
-})
-})
-})
-})
-})
-})
-})
- }
-})
-
-
-  
-
-
-client.on('message', message => {
-  if(message.content.startsWith(prefix + "html")) { 
-     message.channel.send("**اكتب الكود**").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let lan = '';
-    let md = '';
-    let br = '';
-    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-    .then(collected => {
-      lan = collected.first().content
-      collected.first().delete()
-e.delete();
-     message.channel.send('**قم بكتابة وصف الكود**').then(m => {
-let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(co => {
-  md = co.first().content
-        co.first().delete()
-        m.delete();
-message.channel.send('**اخيرا . قم بكتابة صانع الكود**').then(ms => {
-let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
-.then(col => {
-  br = col.first().content
-        col.first().delete()
-
-ms.delete()
-
- message.channel.send('**تم النشر**').then(b => {
-
-var gg = message.guild.channels.find('name', '❆-codes-html')//اسم الروم الي تبي ينشر فيه
-if(!gg) return;
-if(gg) {
-gg.send(`@everyone | @here
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**FOX Community©** :arrow_down:
-${lan}
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-**وصف الكود**: ${md}
-**تم النشر بواسطة**: <@${message.author.id}>
-**المصدر / الشخص الذي صنع الكود**: ${br}`);
-}        
-})
-})
-})
-})
-})
-})
-})
- }
-})
 
 
   
@@ -434,28 +203,11 @@ client.on('guildMemberAdd', member=> {
 
 
 
-client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","MEMBER"));
-    });
 
 
 
 
 
-
-
-
-
-
-
-
-client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","MEMBER"));
-    });
-
-client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","MEMBER"));
-    });
 
 
 
@@ -550,95 +302,26 @@ gg.send({embed : new Discord.RichEmbed()
 
 
 
-
 client.on('message', message => {
             if (message.content.startsWith(prefix + prefix + "help" + "-system")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField('     **$تقديم** ' ,' **[io],[js],[eric],[html],[py] تقديم رتبة مبرمج** ')
-.addField('     **$js**  ' ,' **js للنشر كود في سيرفر** ')
-.addField('     **$io** ' , '**io للنشر كود في سيرفر**') 
-.addField('     **$eric** ' , '**eric للنشر كود في سيرفر**') 
-.addField('     **$html** ' ,' **html للنشر كود في سيرفر**')
-.addField('     **$py** ' , '**py للنشر كود في سيرفر**')
+.addField('     **$تقديم** ' ,' **Rank support** ')
 .addField('     **Register** ' ,' **للتسجيل في سيرفر** ')
 .addField('     **$clear ** ' ,' **لمسح شات** ')
-.addField('     **$bc ** ' ,' **للنشر في سيرفر** ')
+.addField('     **$bc1 ** ' ,' **مع امبد للنشر في سيرفر** ')
+.addField('     **$bc2 ** ' ,' ** للكل بدون امبد للنشر في سيرفر** ')
 .setColor('#ff5e00')
   message.channel.sendEmbed(embed);
     }
 });
+
 
 client.on('message', message => {
             if (message.content.startsWith(prefix + "help")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField('     **$$help-system** ' ,' **System يعرض لك اوامر بوت** ')
-.addField('     **$$help-codes**  ' ,' **يعرض لك اوامر اكواد للتضيفها في سيرفر** ')
-.setColor('#ff5e00')
-  message.channel.sendEmbed(embed);
-    }
-});
-
-client.on('message', message => {
-            if (message.content.startsWith(prefix + prefix + "help" + "-codes")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **$$h-codes-js**  ' ,' **js يعرض لك اكواد بلغة ** ')
-.addField('     **$$h-codes-py**  ' ,' **py يعرض لك اكواد بلغة ** ')
-.addField('     **$$h-codes-io**  ' ,' **io يعرض لك اكواد بلغة ** ')
-.addField('     **$$h-codes-html**  ' ,' **html يعرض لك اكواد بلغة ** ')
-.addField('     **$$h-codes-eric**  ' ,' **eric يعرض لك اكواد بلغة ** ')
-.setColor('#ff5e00')
-  message.channel.sendEmbed(embed);
-    }
-});
-
-client.on('message', message => {
-            if (message.content.startsWith(prefix + prefix + "h" + "-codes" +"-js")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **سوف يتم اضافة اكواد** ')
-.setColor('#ff5e00')
-  message.channel.sendEmbed(embed);
-    }
-});
-
-client.on('message', message => {
-            if (message.content.startsWith(prefix + prefix + "h" + "-codes" +"-py")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **سوف يتم اضافة اكواد** ')
-.setColor('#ff5e00')
-  message.channel.sendEmbed(embed);
-    }
-});
-
-client.on('message', message => {
-            if (message.content.startsWith(prefix + prefix + "h" + "-codes" +"-io")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **سوف يتم اضافة اكواد** ')
-.setColor('#ff5e00')
-  message.channel.sendEmbed(embed);
-    }
-});
-
-client.on('message', message => {
-            if (message.content.startsWith(prefix + prefix + "h" + "-codes" +"-html")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **سوف يتم اضافة اكواد** ')
-.setColor('#ff5e00')
-  message.channel.sendEmbed(embed);
-    }
-});
-
-client.on('message', message => {
-            if (message.content.startsWith(prefix + prefix + "h" + "-codes" +"-eric")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **سوف يتم اضافة اكواد** ')
 .setColor('#ff5e00')
   message.channel.sendEmbed(embed);
     }
