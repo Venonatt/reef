@@ -333,7 +333,6 @@ __~~The King Bot~~__ By: Peery#0609
 
 
 client.on('message', async message =>{
-  var prefix = "$";
 const ms = require("ms");
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
@@ -400,7 +399,6 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return mess
  
 });
 
-var prefix = "$"
 client.on('message', message => {
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
@@ -441,7 +439,6 @@ client.on('message', message => {
 });
 
 
-var prefix = "$"
 client.on('message', message => {
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
