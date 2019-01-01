@@ -191,25 +191,6 @@ msg.delete();
 
 
 
-  
-
-
-
-client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","MEMBER"));
-    });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 client.on('message', message => {
@@ -302,6 +283,7 @@ gg.send({embed : new Discord.RichEmbed()
 
 
 
+
 client.on('message', message => {
             if (message.content.startsWith(prefix + prefix + "help" + "-system")) {
      let embed = new Discord.RichEmbed()
@@ -326,6 +308,7 @@ client.on('message', message => {
   message.channel.sendEmbed(embed);
     }
 });
+
 
 
 
